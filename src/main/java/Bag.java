@@ -13,6 +13,10 @@ public abstract class Bag {
      *       - an int named capacity
      *       - an array of Strings named contents
      */
+    String color;
+    int numberOfContents;
+    int capacity;
+    String[] contents;
 
 
 
@@ -26,6 +30,10 @@ public abstract class Bag {
      * be empty (e.g. numberOfContents is 0 and an empty String array for
      * its contents.)
      */
+    public Bag(String color, int capacity){
+        this.color = color;
+        this.capacity = capacity;
+    }
 
 
 
@@ -37,6 +45,17 @@ public abstract class Bag {
      *           - getNumberOfContents
      *           - getCapacity
      */
+    public String getColor(){
+        return color;
+    }
+
+    public int getNumberOfContents(){
+        return numberOfContents;
+    }
+
+    public int getCapacity(){
+        return capacity;
+    }
 
 
 
@@ -45,6 +64,9 @@ public abstract class Bag {
      * TODO: Create a setter function called setColor which sets the
      *       color of this bag to the given color.
      */
+    public void setColor(String color){
+        this.color = color;
+    }
 
 
 
@@ -60,6 +82,26 @@ public abstract class Bag {
      *       This method should return true if the item was added
      *       and false otherwise.
      */
+    public boolean addItem(String item){
+        if (numberOfContents+1<=capacity) {
+            numberOfContents++;
+            String[] temp;
+            if (contents == null) {
+                temp = new String[1];
+            } else {
+                temp = new String[contents.length + 1];
+            }
+            if (contents != null) {
+                for(int i = 0; i < contents.length; i++){
+                    temp[i] = contents[i];
+                }
+            }
+            temp[temp.length-1] = item;
+            contents = temp;
+            return true;
+        }
+        return false;
+    }
 
 
 
@@ -75,6 +117,16 @@ public abstract class Bag {
      *
      * @return
      */
+    public String popItem(){
+        String[] temp = new String[contents.length-1];
+        String removed = contents[contents.length-1];
+        for(int i = 0; i < contents.length-1; i++){
+            temp[i] = contents[i];
+        }
+        numberOfContents--;
+        contents = temp;
+        return removed;
+    }
 
 
 
@@ -87,7 +139,7 @@ public abstract class Bag {
      */
     public void increaseCapacity(int n) {
         // TODO: Implement this method.
-
+        capacity += n;
     }
 
     /**
